@@ -4,47 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECECEC"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/sign_in"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
         android:text="Sign in"
+        android:textColor="#373737"
         android:textSize="35sp"
-        android:layout_margin="50dp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:layout_width="350sp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/sign_in"
-        android:hint="Username"
-        android:layout_margin="10sp"
-        android:padding="20sp"
-        android:drawableLeft="@drawable/ic_baseline_person_outline_24"
-        android:drawablePadding="20sp"/>
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/username"
-        android:hint="Password"
-        android:layout_margin="10sp"
-        android:padding="20sp"
-        android:drawableLeft="@drawable/ic_baseline_info_24"
-        android:drawablePadding="20sp"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/login_btn"
-        android:layout_below="@id/password"
-        android:text="Login"
         android:layout_centerHorizontal="true"
-        android:layout_margin="20sp"/>
+        android:layout_marginTop="150dp"
+        app:cardCornerRadius="20sp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/sign_in"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:drawableLeft="@drawable/ic_baseline_person_outline_24"
+                android:drawablePadding="20sp"
+                android:hint="Username"
+                android:padding="20sp" />
+
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/username"
+                android:layout_margin="10sp"
+                android:drawableLeft="@drawable/ic_baseline_info_24"
+                android:drawablePadding="20sp"
+                android:hint="Password"
+                android:padding="20sp"
+                android:inputType="textPassword"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/login_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/password"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="20sp"
+                android:text="Login" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </RelativeLayout>
