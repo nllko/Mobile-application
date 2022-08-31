@@ -2,6 +2,7 @@ package com.example.mobile_application;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -70,6 +71,8 @@ public class LoginActivity extends AppCompatActivity {
             handler.post(() -> {
                 if (finalResponseCode == HttpURLConnection.HTTP_OK) {
                     Toast.makeText(getApplicationContext(), "Login successful", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                    startActivity(intent);
                 }
                 if (finalResponseCode == HttpURLConnection.HTTP_UNAUTHORIZED) {
                     Toast.makeText(getApplicationContext(), "Login unsuccessful", Toast.LENGTH_SHORT).show();
