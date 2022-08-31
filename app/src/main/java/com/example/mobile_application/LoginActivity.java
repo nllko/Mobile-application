@@ -17,20 +17,20 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     URL loginUrl = new URL("https://engine.free.beeceptor.com/api/login");
     private TextView username;
     private TextView password;
     private MaterialButton loginButton;
 
-    public MainActivity() throws MalformedURLException {
+    public LoginActivity() throws MalformedURLException {
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         username = (TextView) findViewById(R.id.username);
         password = (TextView) findViewById(R.id.password);
