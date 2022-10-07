@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobile_application.model.Sport;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     ArrayList<Sport> sports;
+    Context context;
 
     public CustomAdapter(Context context, ArrayList<Sport> sports) {
+        this.context = context;
         this.sports = sports;
     }
 
