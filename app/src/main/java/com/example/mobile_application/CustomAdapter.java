@@ -1,18 +1,36 @@
 package com.example.mobile_application;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobile_application.model.Sport;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
     ArrayList<Sport> sports;
@@ -48,7 +66,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return sports.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView name;
         ImageView image;
 
@@ -56,6 +74,60 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             super(itemView);
             name = itemView.findViewById(R.id.name);
             image = itemView.findViewById(R.id.image);
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            try {
+                System.out.println(getDetailsJson(getAdapterPosition()).toString());
+            } catch (MalformedURLException | ExecutionException | InterruptedException e) {
+                e.printStackTrace();
+            }
+            LayoutInflater inflater = (LayoutInflater)
+                    context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View popupView = inflater.inflate(R.layout.popup_details, null);
+
+            // create the popup window
+            int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+            final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+            // show the popup window
+            // which view you pass in doesn't matter, it is only used for the window tolken
+            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+            // dismiss the popup window when touched
+            popupView.setOnTouchListener((v, event) -> {
+                popupWindow.dismiss();
+                return true;
+            });
+        }
+    }
+    private JSONObject getDetailsJson(int id) throws MalformedURLException, ExecutionException, InterruptedException {
+        URL url = new URL("https://engine.free.beeceptor.com/api/getSportDetails?sportId="+(id+1));
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        Future<JSONObject> futureJson = service.submit(()->{
+            String json = null;
+            try {
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuilder response = new StringBuilder();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                json = response.toString();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return new JSONObject(json);
+        });
+        return futureJson.get();
     }
 }
