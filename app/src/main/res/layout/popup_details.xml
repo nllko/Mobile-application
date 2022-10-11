@@ -1,16 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#62def8">
-
-    <TextView
-        android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.cardview.widget.CardView
+        android:layout_width="300sp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:textSize="22sp"
-        android:text="This is a popup window."/>
+        app:cardCornerRadius="10sp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:drawablePadding="5sp"
+                    android:drawableLeft="@drawable/ic_baseline_access_time_24"
+                    android:text="11:30 - 12:30"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:padding="10sp"
+                    android:textColor="@color/black"
+                    android:drawablePadding="5sp"
+                    android:drawableLeft="@drawable/ic_baseline_calendar_month_24"
+                    android:text="2021-04-15"/>
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#D3D3D3"
+                android:layout_margin="5sp"/>
+            <TextView
+                android:id="@+id/sportName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10sp"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:text="Sample Text"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#D3D3D3"
+                android:layout_margin="5sp"/>
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10sp"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:text="Sample Adress"
+                android:drawableRight="@drawable/ic_baseline_map_24"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#D3D3D3"
+                android:layout_margin="5sp"/>
+            <TextView
+                android:id="@+id/phoneNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10sp"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:text="Sample Phone"
+                android:drawableRight="@drawable/ic_baseline_phone_24"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#D3D3D3"
+                android:layout_margin="5sp"/>
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="10sp"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                android:text="Sample Price"/>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </RelativeLayout>
