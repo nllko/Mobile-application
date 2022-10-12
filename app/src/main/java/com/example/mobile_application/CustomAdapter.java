@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobile_application.model.Sport;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -79,8 +80,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         @Override
         public void onClick(View view) {
+            JSONObject jsonObject = null;
             try {
-                System.out.println(getDetailsJson(getAdapterPosition()).toString());
+                jsonObject = getDetailsJson(getAdapterPosition());
             } catch (MalformedURLException | ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -88,16 +90,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View popupView = inflater.inflate(R.layout.popup_details, null);
 
-            // create the popup window
+            TextView textViewSportName = popupView.findViewById(R.id.sportName);
+            TextView textViewAddress = popupView.findViewById(R.id.address);
+            TextView textViewPhone = popupView.findViewById(R.id.phoneNumber);
+            TextView textViewPrice = popupView.findViewById(R.id.price);
+
+            try {
+                textViewSportName.setText(jsonObject.getString("name"));
+                textViewAddress.setText(jsonObject.getString("address"));
+                textViewPhone.setText(jsonObject.getString("phone"));
+                textViewPrice.setText(jsonObject.getString("price")+" "+jsonObject.getString("currency"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
             int width = LinearLayout.LayoutParams.WRAP_CONTENT;
             int height = LinearLayout.LayoutParams.WRAP_CONTENT;
             final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
 
-            // show the popup window
-            // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
 
-            // dismiss the popup window when touched
             popupView.setOnTouchListener((v, event) -> {
                 popupWindow.dismiss();
                 return true;
